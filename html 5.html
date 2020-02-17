@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Prueba de Firestore para los chicxs</title>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+</head>
+<body>
+    <script>
+        // DOC: https://firebase.google.com/docs/firestore/quickstart?authuser=2
+        // inicializa la librería de firebase, con los identificadores de nuestros proyectos en firebase.google.com
+        firebase.initializeApp({
+            apiKey: "AIzaSyD8T55JZWHm2V_0iVE-P7_qEc0Shnxx8RY",
+            authDomain: "eart-ebb69.firebaseapp.com",
+            projectId: "eart-ebb69",
+        });
+        // en este punto firebase está listo para ser usado
+        // se crea un objeto "referencia" para poder darle instrucciones al firestore de nuestro proyecto
+        var db = firebase.firestore();
+
+        writeSomething = () => db.collection("users").add({
+                first: "Andrés",
+                first: "Antonio",
+                last: "Lovelace",
+                born: 1815,
+                son: {
+                    first: "Ado",
+                    last: "Lovelace",
+                    born: 1840
+                }
+            })
+            .then(function(docRef) {
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch(function(error) {
+                console.error("Error adding document: ", error);
+            });
+        readAll = () => db.collection("users").get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    console.log(`${doc.id} => ${doc.data().first}`);
+                });
+            });
+    </script>
+    
+</body>
+    <button onclick="writeSomething()">Escribir</button>
+    <button onclick="readAll()">Leer</button>
+</html>
