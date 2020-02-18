@@ -20,6 +20,7 @@
         // en este punto firebase está listo para ser usado
         // se crea un objeto "referencia" para poder darle instrucciones al firestore de nuestro proyecto
         var db = firebase.firestore();
+        
 
         writeSomething = () => db.collection("users").add({
                 first: "Andrés",
@@ -44,6 +45,9 @@
                 });
             });
     </script>
+    <button>
+        no Leer
+    </button>
     
 </body>
     <button onclick="writeSomething()">Escribir</button>
